@@ -1,0 +1,710 @@
+
+    /* =====================================================
+       CSS CUSTOM PROPERTIES (Design Tokens)
+       Change these variables to retheme the entire page.
+    ===================================================== */
+    :root {
+      --bg-page:        #050505;   /* darkest background - sleek near black */
+      --bg-card:        #0f0f11;   /* card / panel surface */
+      --bg-card-alt:    #161619;   /* slightly lighter card */
+      --border:         #222226;   /* subtle border colour */
+      --text-primary:   #ededed;   /* main readable text */
+      --text-secondary: #888888;   /* muted / label text */
+      --text-mono:      #a1a1aa;   /* monospaced number text */
+      --accent-blue:    #3b82f6;   /* historical data line */
+      --accent-amber:   #f59e0b;   /* predicted data line */
+      --accent-green:   #10b981;   /* positive / rise indicator */
+      --accent-red:     #ef4444;   /* negative / fall indicator */
+      --accent-teal:    #06b6d4;   /* highlight accent */
+      --font-head:      'Syne', sans-serif;
+      --font-body:      'Inter', sans-serif;
+      --font-mono:      'DM Mono', monospace;
+      --radius:         12px;
+      --radius-sm:      8px;
+    }
+
+    /* =====================================================
+       RESET & BASE STYLES
+    ===================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  /* Professional minimalistic glowing ambient background */
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(120, 119, 198, 0.04), transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.04), transparent 45%);
+  background-attachment: fixed;
+}
+
+    /* =====================================================
+       PAGE LAYOUT — full-width container with max-width
+    ===================================================== */
+    .page-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* =====================================================
+       HEADER SECTION
+       - Site title, subtitle, and top-right region selector
+    ===================================================== */
+    .page-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .header-left h1 {
+      font-family: var(--font-head);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      /* gradient text: blue → teal */
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .header-left p {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Live status indicator dot in the header */
+    .live-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--accent-green);
+    }
+    .live-dot::before {
+      content: '';
+      display: block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      /* pulse animation */
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(1.4); }
+    }
+
+    /* =====================================================
+       CONTROLS BAR
+       - Region selector + time horizon buttons + predict CTA
+    ===================================================== */
+    .controls-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Region dropdown */
+    .region-select {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .region-select:hover,
+    .region-select:focus { border-color: var(--accent-blue); }
+
+    /* Time horizon button group */
+    .horizon-group {
+      display: flex;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .horizon-btn {
+      background: transparent;
+      color: var(--text-secondary);
+      border: none;
+      padding: 8px 16px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .horizon-btn:hover { background: var(--bg-card-alt); color: var(--text-primary); }
+
+    /* Active time horizon button */
+    .horizon-btn.active {
+      background: var(--accent-blue);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    /* Predict button — the main CTA */
+    .predict-btn {
+      margin-left: auto;
+      background: #ffffff; /* Clean white for premium look */
+      color: #050505; /* Deep black text */
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px; /* Pill shape */
+      padding: 10px 24px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(255, 255, 255, 0.1);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .predict-btn:hover   { 
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
+      opacity: 0.95; 
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .predict-btn:active  { transform: scale(0.95); }
+    .predict-btn.loading { opacity: 0.6; cursor: wait; }
+
+    /* =====================================================
+       METRIC CARDS ROW
+       - Shows summary numbers above the chart
+    ===================================================== */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      transition: border-color 0.2s;
+    }
+    .metric-card:hover { border-color: var(--accent-blue); }
+
+    .metric-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .metric-value {
+      font-family: var(--font-mono);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--text-mono);
+    }
+
+    /* Coloured delta badge (e.g. "+12% ↑") */
+    .metric-delta {
+      display: inline-block;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      margin-top: 4px;
+      padding: 2px 7px;
+      border-radius: 20px;
+    }
+    .delta-up   { background: rgba(16,185,129,0.15); color: var(--accent-green); }
+    .delta-down { background: rgba(239,68,68,0.15);  color: var(--accent-red); }
+
+    /* =====================================================
+       CHART CARD
+       - The main Chart.js canvas lives here
+    ===================================================== */
+    .chart-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chart-title {
+      font-family: var(--font-head);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Legend — shows what each line colour means */
+    .chart-legend {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Solid swatch for historical, dashed for prediction */
+    .legend-swatch {
+      width: 24px;
+      height: 3px;
+      border-radius: 2px;
+    }
+    .swatch-solid  { background: var(--accent-blue); }
+    .swatch-dashed {
+      background: repeating-linear-gradient(
+        90deg, var(--accent-amber) 0 5px, transparent 5px 9px
+      );
+    }
+    .swatch-band {
+      background: rgba(245,158,11,0.2);
+      height: 8px;
+      border-radius: 2px;
+    }
+
+    /* Canvas wrapper — Chart.js needs explicit height on the wrapper */
+    .chart-canvas-wrap {
+      position: relative;
+      width: 100%;
+      height: 320px;
+    }
+
+    /* =====================================================
+       BOTTOM TWO-COLUMN LAYOUT
+       - Reason box (left) + Price impact panel (right)
+    ===================================================== */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 680px) {
+      .bottom-grid { grid-template-columns: 1fr; }
+    }
+
+    /* =====================================================
+       REASON BOX
+       - Explains WHY demand is going up or down
+    ===================================================== */
+    .reason-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+    }
+
+    .reason-card h2 {
+      font-family: var(--font-head);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--accent-teal);
+      letter-spacing: 0.02em;
+    }
+
+    /* Section heading inside the reason box (e.g. "Domestic", "Geopolitical") */
+    .reason-section-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+      margin: 12px 0 6px;
+    }
+
+    /* Individual reason item — bullet with coloured dot */
+    .reason-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+    .reason-item:last-child { border-bottom: none; }
+
+    /* Coloured bullet dot */
+    .reason-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+    .dot-domestic    { background: var(--accent-blue); }
+    .dot-geopolitical { background: var(--accent-amber); }
+
+    /* =====================================================
+       PRICE IMPACT PANEL
+       - Shows predicted % price change and budget calculator
+    ===================================================== */
+    .price-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+    }
+
+    .price-card h2 {
+      font-family: var(--font-head);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--accent-amber);
+      letter-spacing: 0.02em;
+    }
+
+    /* Big price change number */
+    .price-change-display {
+      font-family: var(--font-mono);
+      font-size: 36px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .price-change-display.up   { color: var(--accent-red); }
+    .price-change-display.down { color: var(--accent-green); }
+
+    .price-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+    }
+
+    /* Separator line */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1rem 0;
+    }
+
+    /* Budget calculator label */
+    .calc-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    /* Budget input field */
+    .calc-input {
+      width: 100%;
+      background: var(--bg-card-alt);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 9px 12px;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 10px;
+    }
+    .calc-input:focus { border-color: var(--accent-blue); }
+
+    /* Budget result row */
+    .calc-result {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--text-secondary);
+      padding: 5px 0;
+    }
+
+    .calc-result strong {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* =====================================================
+       FOOTER NOTE
+    ===================================================== */
+    .footer-note {
+      margin-top: 2rem;
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    /* =====================================================
+       LOADING SKELETON ANIMATION
+       Used while prediction is "computing"
+    ===================================================== */
+    @keyframes skeleton-pulse {
+      0%, 100% { opacity: 0.5; }
+      50%       { opacity: 1; }
+    }
+    .skeleton {
+      animation: skeleton-pulse 1.2s ease-in-out infinite;
+    }
+
+    /* =====================================================
+       FADE-IN ANIMATION for cards on load
+    ===================================================== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeUp 0.5s ease forwards;
+    }
+    /* Stagger each card */
+    .fade-in:nth-child(1) { animation-delay: 0.05s; }
+    .fade-in:nth-child(2) { animation-delay: 0.12s; }
+    .fade-in:nth-child(3) { animation-delay: 0.19s; }
+    .fade-in:nth-child(4) { animation-delay: 0.26s; }
+  
+/* =====================================================
+   LIGHT MODE THEME
+   ===================================================== */
+[data-theme="light"] {
+  --bg-page:        #f8fafc;
+  --bg-card:        #ffffff;
+  --bg-card-alt:    #f1f5f9;
+  --border:         #e2e8f0;
+  --text-primary:   #0f172a;
+  --text-secondary: #64748b;
+  --text-mono:      #334155;
+  --accent-blue:    #2563eb;
+  --accent-amber:   #d97706;
+  --accent-green:   #059669;
+  --accent-red:     #dc2626;
+  --accent-teal:    #0891b2;
+}
+
+[data-theme="light"] body {
+  background-image:
+    linear-gradient(rgba(30,80,160,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,80,160,0.04) 1px, transparent 1px);
+}
+
+[data-theme="light"] .metric-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 0 0 20px rgba(37, 99, 235, 0.1) !important;
+}
+
+[data-theme="light"] .chart-card,
+[data-theme="light"] .reason-card,
+[data-theme="light"] .price-card,
+[data-theme="light"] .metric-card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+}
+
+[data-theme="light"] .predict-btn {
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+[data-theme="light"] select,
+[data-theme="light"] .calc-input {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .delta-up {
+  background: rgba(5,150,105,0.1);
+}
+[data-theme="light"] .delta-down {
+  background: rgba(220,38,38,0.1);
+}
+
+/* ---- CRAZY ANIMATIONS & REFINEMENTS ---- */
+
+/* Smooth global transitions for theme toggling */
+* {
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced Fade In with Slide Up & Blur */
+@keyframes slideUpFade {
+    0% { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes slideInDown {
+    0% { opacity: 0; transform: translate(-50%, -20px) scale(0.9); }
+    100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+
+.validation-toast {
+    animation: slideInDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.fade-in {
+    opacity: 0;
+    animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+/* Dedicated blur overlay for premium modal logic */
+@keyframes blurModalFade {
+    0% { opacity: 0; backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px); background-color: rgba(0, 0, 0, 0); }
+    100% { opacity: 1; backdrop-filter: blur(36px); -webkit-backdrop-filter: blur(36px); background-color: rgba(0, 0, 0, 0.5); }
+}
+
+.blur-overlay {
+    animation: blurModalFade 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards !important;
+}
+
+/* Staggered delays for children */
+.page-wrap > *:nth-child(1) { animation-delay: 0.1s !important; }
+.page-wrap > *:nth-child(2) { animation-delay: 0.2s !important; }
+.page-wrap > *:nth-child(3) { animation-delay: 0.3s !important; }
+.page-wrap > *:nth-child(4) { animation-delay: 0.4s !important; }
+.bottom-grid > *:nth-child(1) { animation-delay: 0.5s !important; }
+.bottom-grid > *:nth-child(2) { animation-delay: 0.6s !important; }
+
+/* Interactive Metric Cards */
+.metric-card {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.4s ease !important;
+}
+.metric-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 20px rgba(59, 130, 246, 0.15) !important;
+    border-color: rgba(59, 130, 246, 0.5) !important;
+    z-index: 10;
+}
+
+/* Button micro-interactions */
+button {
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s, box-shadow 0.3s !important;
+}
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+button:active {
+    transform: scale(0.92) translateY(0);
+}
+
+/* Glowing Live Dot */
+@keyframes intensePulse {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.8); }
+    70% { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+.live-dot::before {
+    animation: intensePulse 2s infinite !important;
+}
+
+/* Hover effects for tabs */
+.tabs-container button {
+    position: relative;
+    overflow: visible;
+}
+.tabs-container button::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #3b82f6;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.tabs-container button:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Table Row Hover */
+tr {
+    transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+tbody tr:hover {
+    background-color: var(--bg-card-alt);
+    transform: scale(1.02) translateX(4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    z-index: 10;
+    position: relative;
+    border-radius: 8px;
+}
+
+/* Chart Canvas hover glow */
+.chart-canvas-wrap {
+    transition: filter 0.5s ease, transform 0.5s ease;
+}
+.chart-card:hover .chart-canvas-wrap {
+    filter: drop-shadow(0 0 16px rgba(59, 130, 246, 0.15));
+}
+
+/* =====================================================
+   AI CHAT ASSISTANT
+===================================================== */
+.ai-chat-btn {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.pulse-glow {
+    animation: pulse-glow 2s infinite alternate;
+}
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+.typing-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--text-secondary);
+    border-radius: 50%;
+    display: inline-block;
+    animation: typing 1.4s infinite ease-in-out both;
+}
+@keyframes typing {
+    0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+    40% { transform: scale(1); opacity: 1; }
+}
+body {
+    background-color: #020617;
+    color: #ffffff;
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+}
+h1, h2, h3 {
+    color: #f97316;
+    font-family: monospace;
+}
+
+@keyframes slideRight { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }

@@ -1,0 +1,182 @@
+[
+  {
+    "district": "Dharavi",
+    "avg_household_income_inr": 14592,
+    "monthly_energy_expenditure_inr": 1958,
+    "population": 179338,
+    "electrification_rate_pct": 89.4,
+    "lat": 20.653,
+    "lng": 74.249
+  },
+  {
+    "district": "Wadala",
+    "avg_household_income_inr": 33036,
+    "monthly_energy_expenditure_inr": 4677,
+    "population": 281344,
+    "electrification_rate_pct": 94.6,
+    "lat": 19.75,
+    "lng": 73.399
+  },
+  {
+    "district": "Govandi",
+    "avg_household_income_inr": 27992,
+    "monthly_energy_expenditure_inr": 2419,
+    "population": 232505,
+    "electrification_rate_pct": 89.1,
+    "lat": 18.623,
+    "lng": 74.701
+  },
+  {
+    "district": "Mankhurd",
+    "avg_household_income_inr": 9864,
+    "monthly_energy_expenditure_inr": 4319,
+    "population": 261070,
+    "electrification_rate_pct": 84.3,
+    "lat": 19.935,
+    "lng": 74.937
+  },
+  {
+    "district": "Kurla",
+    "avg_household_income_inr": 9885,
+    "monthly_energy_expenditure_inr": 4549,
+    "population": 187873,
+    "electrification_rate_pct": 84.2,
+    "lat": 18.913,
+    "lng": 73.989
+  },
+  {
+    "district": "Deonar",
+    "avg_household_income_inr": 32761,
+    "monthly_energy_expenditure_inr": 3542,
+    "population": 84676,
+    "electrification_rate_pct": 84.9,
+    "lat": 19.249,
+    "lng": 73.493
+  },
+  {
+    "district": "Chembur",
+    "avg_household_income_inr": 29731,
+    "monthly_energy_expenditure_inr": 2858,
+    "population": 263569,
+    "electrification_rate_pct": 70.1,
+    "lat": 18.595,
+    "lng": 73.492
+  },
+  {
+    "district": "Trombay",
+    "avg_household_income_inr": 32299,
+    "monthly_energy_expenditure_inr": 4718,
+    "population": 86546,
+    "electrification_rate_pct": 80.5,
+    "lat": 18.585,
+    "lng": 75.472
+  },
+  {
+    "district": "Ghatkopar",
+    "avg_household_income_inr": 17924,
+    "monthly_energy_expenditure_inr": 2518,
+    "population": 77870,
+    "electrification_rate_pct": 73.9,
+    "lat": 18.687,
+    "lng": 73.403
+  },
+  {
+    "district": "Vikhroli",
+    "avg_household_income_inr": 22898,
+    "monthly_energy_expenditure_inr": 2991,
+    "population": 207502,
+    "electrification_rate_pct": 97.0,
+    "lat": 20.525,
+    "lng": 74.449
+  },
+  {
+    "district": "Mulund",
+    "avg_household_income_inr": 28620,
+    "monthly_energy_expenditure_inr": 4553,
+    "population": 158671,
+    "electrification_rate_pct": 87.9,
+    "lat": 18.579,
+    "lng": 75.43
+  },
+  {
+    "district": "Thane",
+    "avg_household_income_inr": 19437,
+    "monthly_energy_expenditure_inr": 1178,
+    "population": 174233,
+    "electrification_rate_pct": 94.5,
+    "lat": 18.793,
+    "lng": 72.84
+  },
+  {
+    "district": "Bhiwandi",
+    "avg_household_income_inr": 12444,
+    "monthly_energy_expenditure_inr": 1878,
+    "population": 238900,
+    "electrification_rate_pct": 72.8,
+    "lat": 19.077,
+    "lng": 75.179
+  },
+  {
+    "district": "Nashik Rural",
+    "avg_household_income_inr": 29497,
+    "monthly_energy_expenditure_inr": 2763,
+    "population": 145970,
+    "electrification_rate_pct": 99.6,
+    "lat": 19.191,
+    "lng": 75.356
+  },
+  {
+    "district": "Pune Rural",
+    "avg_household_income_inr": 24359,
+    "monthly_energy_expenditure_inr": 3797,
+    "population": 184208,
+    "electrification_rate_pct": 90.7,
+    "lat": 20.304,
+    "lng": 73.426
+  },
+  {
+    "district": "Aurangabad",
+    "avg_household_income_inr": 28253,
+    "monthly_energy_expenditure_inr": 2021,
+    "population": 60782,
+    "electrification_rate_pct": 86.6,
+    "lat": 19.095,
+    "lng": 73.629
+  },
+  {
+    "district": "Nanded",
+    "avg_household_income_inr": 25369,
+    "monthly_energy_expenditure_inr": 2362,
+    "population": 216094,
+    "electrification_rate_pct": 98.2,
+    "lat": 18.541,
+    "lng": 73.436
+  },
+  {
+    "district": "Latur",
+    "avg_household_income_inr": 27263,
+    "monthly_energy_expenditure_inr": 3067,
+    "population": 189143,
+    "electrification_rate_pct": 74.1,
+    "lat": 19.318,
+    "lng": 75.377
+  },
+  {
+    "district": "Osmanabad",
+    "avg_household_income_inr": 21439,
+    "monthly_energy_expenditure_inr": 3612,
+    "population": 236792,
+    "electrification_rate_pct": 88.9,
+    "lat": 20.232,
+    "lng": 74.461
+  },
+  {
+    "district": "Solapur",
+    "avg_household_income_inr": 12665,
+    "monthly_energy_expenditure_inr": 2213,
+    "population": 187908,
+    "electrification_rate_pct": 78.9,
+    "lat": 19.627,
+    "lng": 74.239
+  }
+]

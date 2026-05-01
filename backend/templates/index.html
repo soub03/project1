@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Demand & Price Predictor</title>
+    <!-- Modern Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=DM+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+    
+    <!-- React and ReactDOM UMD -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel for in-browser JSX transpilation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Axios for API calls -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- App Styles -->
+    <link rel="stylesheet" href="/static/styles.css">
+    
+    <script>
+        window.onerror = function(message, source, lineno, colno, error) {
+            document.body.innerHTML += '<div style="color:red; padding:20px; background:white; position:absolute; top:0; z-index:9999;">' + 
+                '<b>Error:</b> ' + message + '<br>Source: ' + source + ' (' + lineno + ':' + colno + ')' +
+                '</div>';
+            return true;
+        };
+    </script>
+</head>
+<body>
+    <!-- React Root DOM Node -->
+    <div id="root"></div>
+
+    <!-- App Logic -->
+    <script type="text/babel" src="/static/app.jsx?v=new_feature123"></script>
+    
+    <script>
+        // Initialize Lucide icons after React mounts
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => lucide.createIcons(), 500);
+        });
+    </script>
+</body>
+</html>
